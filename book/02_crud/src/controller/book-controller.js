@@ -29,3 +29,67 @@ exports.findAllbooks = async (req, res, next) => {
         results: books
     });
 }
+
+exports.findBookById = async (req, res, next) => {
+    // const Id = req.params.id;
+    // const book = await BookService.findBookById(Id);
+
+    const book = await BookService.findBookById(req.params.id);
+
+    if(book && book.length > 0) {
+        res.status(HttpStatus.OK).send({
+            status: HttpStatus.OK,
+            message: 'OK',
+            results: book
+        });
+    }
+
+    if(book && book.length === 0) {
+        res.status(HttpStatus.NOT_FOUND).send({
+            status: HttpStatus.NOT_FOUND,       //404
+            message: 'NOT_FOUND',
+            code: -999999,
+            results: [],
+            links:[
+                {
+                    rel: 'bookRegist',
+                    method: 'POST',
+                    href: 'https://api.root.com/api/v1/books'                
+                }
+            ]
+        });
+    }
+}
+
+
+exports.registBook = (req, res, next) => {
+    
+    const result = BookService.registBook(new BookDTO(req.body));
+    
+    if(result) {
+        res.status(HttpStatus.CREATED).send({
+            status: HttpStatus.CREATED, //201
+            message: 'CREATED',
+            results : {
+                id: result.id,
+                Name: result.Name
+            },
+            contentLocation: `/books/${result.id}`
+        });
+    } else {
+        // 실패 시 응답 내용
+        res.status(HttpStatus.BAD_REQUEST).send({
+            status: HttpStatus.BAD_REQUEST,
+            message: 'BAD REQUEST',
+            code: -888888,
+            results: [],
+            links: [
+                {
+                    rel:'bookRegist',
+                    method: 'POST',
+                    href: 'https://api.root.com/api/v1/books'
+                }
+            ]
+        });
+    }
+};

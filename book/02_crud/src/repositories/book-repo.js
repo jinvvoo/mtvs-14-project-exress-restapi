@@ -12,3 +12,39 @@ exports.findAllBooks = (connection) => {
         });
     });
 };
+
+exports.findBookById = (connection, id) => {
+
+    return new Promise((resolve, reject) => {
+
+        connection.query(bookQuery.findBookById(), [id], (err, result) => {
+
+            if(err){
+                reject(err);
+            }
+
+            resolve(result);
+        });
+    });
+};
+
+exports.registNewBook = (connection, newBook) => {
+
+    return new Promise((resolve, reject) => {
+
+        connection.query(
+            bookQuery.registNewBook(),
+            [
+                newBook.title,
+                newBook.author
+            ],
+            (err, result) => {
+                if(err){
+                    reject(err);
+                }
+                console.log('repo result : ', result);
+
+                resolve(result);
+            });
+        });
+};
