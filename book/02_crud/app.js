@@ -10,6 +10,7 @@ const morgen = require('morgan');
 const app = express();
 
 app.use(morgen('dev'));
+app.use(express.json());
 
 const bookRouter = require('./src/routes/book-route');
 app.use('/books', bookRouter);

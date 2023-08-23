@@ -11,7 +11,7 @@ exports.findAllBooks = () => {
         const results = BookRepository.findAllBooks(connection);
 
         connection.end();
-
+        
         resolve(results);
     });   
 }
