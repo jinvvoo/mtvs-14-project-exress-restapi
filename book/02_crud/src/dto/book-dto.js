@@ -1,12 +1,12 @@
 class BookDTO {
     id;
     name;
-    title;
+    author;
 
     constructor(data) {
         this.id = data.id;
         this.name = data.name;
-        this.title = data.title;
+        this.author = data.author;
     }
 
 }

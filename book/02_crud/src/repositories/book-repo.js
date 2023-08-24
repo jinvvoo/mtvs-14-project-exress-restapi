@@ -28,14 +28,14 @@ exports.findBookById = (connection, id) => {
     });
 };
 
-exports.registNewBook = (connection, newBook) => {
+exports.registBook = (connection, newBook) => {
 
     return new Promise((resolve, reject) => {
 
         connection.query(
-            bookQuery.registNewBook(),
+            bookQuery.registBook(),
             [
-                newBook.title,
+                newBook.name,
                 newBook.author
             ],
             (err, result) => {

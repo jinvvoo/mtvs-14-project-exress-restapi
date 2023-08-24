@@ -30,7 +30,7 @@ exports.findBookById = (id) => {
     }); 
 };
 
-exports.registNextBook = (book) => {
+exports.registBook = (book) => {
 
     return new Promise(async (resolve, reject) => {
 
@@ -40,7 +40,7 @@ exports.registNextBook = (book) => {
 
         try {
 
-            const result = await BookRepository.registNewBook(connection, book);
+            const result = await BookRepository.registBook(connection, book);
             console.log('result : ', result.insertId);
 
             const insertedBook = await BookRepository.findBookById(connection, result.insertId);

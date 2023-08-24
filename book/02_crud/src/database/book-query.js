@@ -14,12 +14,12 @@ exports.findBookById = () => {
     `;
 };
 
-exports.registNewBook = () => {
+exports.registBook = () => {
 
     return `
         INSERT 
           INTO TBL_book
-          (title, author)
+          (name, author)
           VALUES
           (?,?)
     `;
